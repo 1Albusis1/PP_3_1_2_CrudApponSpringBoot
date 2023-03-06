@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>All users</title>
+</head>
+
+<body>
+<label>First Spring Boot App</label>
+<br>
+<br>
+<form th:method="GET" th:action="user-create">
+    <button type="submit" class="btn btn-primary">Create User</button>
+</form>
+<br>
+<table>
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Surname</th>
+        <th>Email</th>
+        <th>Operation</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user : ${users}">
+        <td th:text="${user.id}">id</td>
+        <td th:text="${user.name}">name</td>
+        <td th:text="${user.surname}">surname</td>
+        <td th:text="${user.email}">email</td>
+        <td>
+            <form th:method="GET" th:action="@{user-update/{id}(id=${user.id})}">
+                <button type="submit" class="btn btn-primary">Edit</button>
+            </form>
+            <form th:method="DELETE" th:action="@{user-delete/{id}(id=${user.id})}">
+                <button type="submit" class="btn btn-primary">Delete</button>
+            </form>
+        </td>
+
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
